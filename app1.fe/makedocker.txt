@@ -18,4 +18,3 @@ docker container rm app1.fe
 docker login qliang.azurecr.io -u 00000000-0000-0000-0000-000000000000 -p <get token by 'az acr login -n qliang --expose-token'>
 docker tag qliang.azurecr.io/app1.fe-image:v0.2
 docker push qliang.azurecr.io/app1.fe-image:v0.2
-

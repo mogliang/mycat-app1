@@ -1,3 +1,5 @@
+using Microsoft.Extensions.FileProviders;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -11,6 +13,19 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Error");
 }
 app.UseStaticFiles();
+
+try
+{
+    app.UseStaticFiles(new StaticFileOptions
+    {
+        RequestPath = "/azfiles",
+        FileProvider = new PhysicalFileProvider("/mnt/azure/")
+    });
+}
+catch (Exception ex)
+{
+    Console.WriteLine("Setup azfiles static web folder failed. error: " + ex);
+}
 
 app.UseRouting();
 

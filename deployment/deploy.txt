@@ -1,0 +1,26 @@
+# setup VIP
+# https://docs.microsoft.com/en-us/azure/aks/static-ip
+az network public-ip create --resource-group MC_qliang-aks_qliang-dev-aks_eastus --name app1-lb --sku Standard --allocation-method static
+az network public-ip show --resource-group MC_qliang-aks_qliang-dev-aks_eastus --name app1-lb --query ipAddress --output tsv
+
+# setup storage share
+createStorageShare.sh
+kubectl create secret generic app1storage-secret --from-literal=azurestorageaccountname=<account> --from-literal=azurestorageaccountkey=<key> -n app1
+
+# build image
+ref app1.fe/makedocker.txt
+
+# deploy
+kubectl apply -f deployment.yaml
+
+# check
+kubectl describe deployment app1-deployment -n app1
+kubectl get pod -n app1
+kubectl logs <pod name>
+kubectl get service -n app1
+
+# ssh and check mount
+kubectl exec --stdin --tty <pod name> -- /bin/bash
+cd /mnt/azure
+ls
+exit

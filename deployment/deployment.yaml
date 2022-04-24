@@ -1,0 +1,66 @@
+
+# create namespace app
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: app1
+  labels:
+    name: app1
+
+---
+# create deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app1-deployment
+  namespace: app1
+  labels:
+    app: app1
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: app1
+  template:
+    metadata:
+      labels:
+        app: app1
+        tier: fe
+    spec:
+      containers:
+      - name: app1-fe
+        image: qliang.azurecr.io/app1.fe-image:v0.3
+        ports:
+        - containerPort: 8011
+        volumeMounts:
+        - name: azure
+          mountPath: /mnt/azure
+      volumes:
+      - name: azure
+        csi:
+          driver: file.csi.azure.com
+          volumeAttributes:
+            secretName: app1storage-secret
+            shareName: qliangaksapp1share
+
+---
+# create service and bind azure load balancer
+# https://kubernetes.io/docs/concepts/services-networking/service/
+# https://docs.microsoft.com/en-us/azure/aks/static-ip
+apiVersion: v1
+kind: Service
+metadata:
+  name: app1-service
+  namespace: app1
+  annotations:
+    service.beta.kubernetes.io/azure-dns-label-name: qliang-mycat
+spec:
+  type: LoadBalancer
+  loadBalancerIP: 20.127.105.102
+  selector:
+    app: app1
+    tier: fe
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8011
