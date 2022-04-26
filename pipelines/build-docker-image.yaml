@@ -10,6 +10,7 @@ resources:
 
 variables:
   tag: '$(Build.BuildId)'
+  registry: 'qliang-acr'
 
 stages:
 - stage: Build
@@ -30,3 +31,8 @@ stages:
         repository: $(imageName)
         tags: |
           $(tag)
+    - task: Docker@2
+      inputs:
+        containerRegistry: '$(registry)'
+        repository: '$(imageName)'
+        command: 'push'
