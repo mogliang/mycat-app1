@@ -2,6 +2,8 @@ using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Configuration.AddJsonFile("k8sconfig/appsettings.json", true, true);
+
 // Add services to the container.
 builder.Services.AddRazorPages();
 

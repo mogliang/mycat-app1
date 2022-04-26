@@ -20,7 +20,7 @@ kubectl logs <pod name>
 kubectl get service -n app1
 
 # ssh and check mount
-kubectl exec --stdin --tty <pod name> -- /bin/bash
+kubectl exec --stdin --tty <pod name> -n app1 -- /bin/bash
 cd /mnt/azure
 ls
 exit

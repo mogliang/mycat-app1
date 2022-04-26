@@ -29,12 +29,15 @@ spec:
     spec:
       containers:
       - name: app1-fe
-        image: qliang.azurecr.io/app1.fe-image:v0.3
+        image: qliang.azurecr.io/app1.fe-image:v0.4
         ports:
         - containerPort: 8011
         volumeMounts:
         - name: azure
           mountPath: /mnt/azure
+        - name: appsettings
+          mountPath: /app1.fe/k8sconfig
+          readOnly: true
       volumes:
       - name: azure
         csi:
@@ -42,6 +45,9 @@ spec:
           volumeAttributes:
             secretName: app1storage-secret
             shareName: qliangaksapp1share
+      - name: appsettings
+        configMap:
+          name: app1.fe.config
 
 ---
 # create service and bind azure load balancer

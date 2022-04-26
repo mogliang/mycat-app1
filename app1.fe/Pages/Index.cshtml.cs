@@ -6,15 +6,21 @@ namespace app1.fe.Pages;
 
 public class IndexModel : PageModel
 {
+    private readonly IConfiguration Configuration;
     private readonly ILogger<IndexModel> _logger;
     public string ApiAddress => "https://catfact.ninja/fact";
     public CatFact MyCatFact;
 
+    public AppInfo AppInfo;
+
     public string CatImagePath;
 
-    public IndexModel(ILogger<IndexModel> logger)
+    public string MachineInfo;
+
+    public IndexModel(ILogger<IndexModel> logger, IConfiguration config)
     {
         _logger = logger;
+        Configuration = config;
     }
 
     public async Task OnGetAsync()
@@ -32,13 +38,23 @@ public class IndexModel : PageModel
                 _logger.LogInformation($"load cat image {selectedFile.Name} from azure files");
             }
         }
-        
-        if(CatImagePath == null)
+
+        if (CatImagePath == null)
         {
             CatImagePath = "img/black-cat-hi.png";
             _logger.LogWarning($"load default cat image from azure files");
         }
+
+        this.AppInfo = Configuration.GetSection("AppInfo").Get<AppInfo>();
+        MachineInfo = this.AppInfo?.ShowMachineInfo == true ? Environment.MachineName : string.Empty;
     }
+}
+
+public class AppInfo
+{
+    public string Title { set; get; }
+    public string SiteName { set; get; }
+    public bool ShowMachineInfo { set; get; }
 }
 
 public class CatFact

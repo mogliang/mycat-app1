@@ -1,11 +1,12 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = Model.AppInfo?.SiteName??"[Missing]";
+    ViewData["MachineInfo"] = @Model.MachineInfo;
 }
 
 <div class="text-center">
-    <h1 class="display-4">Today's cat</h1>
+    <h1 class="display-4">@Model.AppInfo?.Title</h1>
     <h2>@Model.MyCatFact.fact</h2>
     <p></p>
     <img src="@Model.CatImagePath" width="300px" />
