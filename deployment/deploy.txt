@@ -24,3 +24,6 @@ kubectl exec --stdin --tty <pod name> -n app1 -- /bin/bash
 cd /mnt/azure
 ls
 exit
+
+# sometimes, you need a restart
+kubectl rollout restart deployment app1-deployment -n app1
