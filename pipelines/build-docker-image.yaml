@@ -24,11 +24,12 @@ stages:
           imageName: 'app1.fe-image'
     steps:
     - task: Docker@2
+      displayName: login acr '$(registry)'
       inputs:
         containerRegistry: '$(registry)'
         command: 'login'
     - task: Docker@2
-      displayName: Build an image
+      displayName: Build image $(imageName)
       inputs:
         command: build
         dockerfile: '$(Build.SourcesDirectory)/app1.fe/dockerfile'
@@ -36,7 +37,7 @@ stages:
         tags: |
           $(tag)
     - task: Docker@2
-      displayName: Push image
+      displayName: Push image $(imageName)
       inputs:
         containerRegistry: '$(registry)'
         repository: '$(imageName)'
