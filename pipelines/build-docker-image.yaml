@@ -9,7 +9,7 @@ resources:
 - repo: self
 
 variables:
-  version: '$(Build.BuildId)'
+  version: '$(Build.BuildNumber)'
   registry: 'qliang-acr'
 
 stages:
