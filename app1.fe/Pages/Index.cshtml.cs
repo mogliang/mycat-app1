@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.IO;
+using System.Reflection;
 
 namespace app1.fe.Pages;
 
@@ -17,6 +18,8 @@ public class IndexModel : PageModel
 
     public string MachineInfo;
 
+    public string AppVersion;
+
     public IndexModel(ILogger<IndexModel> logger, IConfiguration config)
     {
         _logger = logger;
@@ -28,6 +31,7 @@ public class IndexModel : PageModel
         HttpClient client = new HttpClient();
         MyCatFact = await client.GetFromJsonAsync<CatFact>(ApiAddress);
 
+        // load image
         if (Directory.Exists(Consts.ExternalFilePath))
         {
             var files = new DirectoryInfo(Consts.ExternalFilePath).GetFiles().ToList();
@@ -45,8 +49,12 @@ public class IndexModel : PageModel
             _logger.LogWarning($"load default cat image from azure files");
         }
 
+        // load title
         this.AppInfo = Configuration.GetSection("AppInfo").Get<AppInfo>();
-        MachineInfo = this.AppInfo?.ShowMachineInfo == true ? Environment.MachineName : string.Empty;
+        this.MachineInfo = this.AppInfo?.ShowMachineInfo == true ? "Host:" + Environment.MachineName : string.Empty;
+
+        // load version info
+        this.AppVersion = "Version:" + Assembly.GetExecutingAssembly().GetName().Version.ToString();
     }
 }
 
