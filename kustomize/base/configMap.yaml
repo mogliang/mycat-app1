@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: app1.fe.config
+  name: app1-config
   namespace: app1
   labels:
     app: app1
     tier: fe
 data:
-  app1.fe.appsettings.json: |
+  appsettings.json: |
     {
       "AppInfo": {
         "Title": "Today's Cats",

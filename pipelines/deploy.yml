@@ -7,21 +7,17 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
-
 - script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+    echo This pipeline deploy demo app (app1) to environment $(deployEnvironment).
+    echo Good luck!
+  displayName: 'Run script'
 
 - task: Kubernetes@1
   displayName: Deploy app1
   inputs:
     connectionType: 'Kubernetes Service Connection'
-    kubernetesServiceEndpoint: 'qliang-dev-aks'
-    namespace: 'app1'
+    kubernetesServiceEndpoint: '$(kubeConnection)'
     command: 'apply'
-    arguments: '-f $(Build.SourcesDirectory)/deployment/deployment.yaml'
+    arguments: '-k $(Build.SourcesDirectory)/kustomize/environments/$(deployEnvironment)'
     secretType: 'dockerRegistry'
     containerRegistryType: 'Azure Container Registry'

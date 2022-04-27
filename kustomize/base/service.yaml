@@ -1,0 +1,20 @@
+# create service and bind azure load balancer
+# https://kubernetes.io/docs/concepts/services-networking/service/
+# https://docs.microsoft.com/en-us/azure/aks/static-ip
+apiVersion: v1
+kind: Service
+metadata:
+  name: app1-service
+  namespace: app1
+  annotations:
+    service.beta.kubernetes.io/azure-dns-label-name: qliang-mycat
+spec:
+  type: LoadBalancer
+  loadBalancerIP: 20.127.105.102
+  selector:
+    app: app1
+    tier: fe
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8011
