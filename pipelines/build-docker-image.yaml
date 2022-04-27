@@ -21,7 +21,7 @@ stages:
     pool:
       vmImage: ubuntu-latest
     variables:
-          imageName: 'app1.fe-image'
+          imageName: 'qliang.azurecr.io/app1.fe-image'
     steps:
     - task: Docker@2
       displayName: Build an image
