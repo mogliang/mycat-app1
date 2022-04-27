@@ -15,10 +15,13 @@ steps:
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
 
-- task: KubernetesManifest@0
-  displayName: deploy app1 to $(k8sconnection)
+- task: Kubernetes@1
+  displayName: Deploy app1
   inputs:
-    action: 'deploy'
-    kubernetesServiceConnection: '$(k8sconnection)'
+    connectionType: 'Kubernetes Service Connection'
+    kubernetesServiceEndpoint: 'qliang-dev-aks'
     namespace: 'app1'
-    manifests: '$(Build.SourcesDirectory)/deployment/deployment.yaml'
+    command: 'apply'
+    arguments: '-f $(Build.SourcesDirectory)/deployment/deployment.yaml'
+    secretType: 'dockerRegistry'
+    containerRegistryType: 'Azure Container Registry'
