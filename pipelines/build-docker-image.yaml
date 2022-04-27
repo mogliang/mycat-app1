@@ -9,7 +9,7 @@ resources:
 - repo: self
 
 variables:
-  version: '$(Build.BuildNumber)'
+  version: '$(Build.BuildId)'
   registry: 'qliang-acr'
 
 stages:
@@ -24,7 +24,7 @@ stages:
           imageName: 'app1.fe-image'
     steps:
     - task: Docker@2
-      displayName: login acr '$(registry)'
+      displayName: login acr $(registry)
       inputs:
         containerRegistry: '$(registry)'
         command: 'login'
@@ -43,3 +43,5 @@ stages:
         containerRegistry: '$(registry)'
         repository: '$(imageName)'
         command: 'push'
+    - script: echo build succeed
+      displayName: $(imageName):$(version) pushed
