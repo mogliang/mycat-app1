@@ -8,7 +8,7 @@ pool:
 
 steps:
 - script: |
-    echo This pipeline deploy demo app (app1) to environment $(deployEnvironment).
+    echo This pipeline deploy demo app https://github.com/mogliang/mycat-app1 to environment $(deployEnvironment).
     echo Good luck!
   displayName: 'Run script'
 
