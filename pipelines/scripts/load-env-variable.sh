@@ -4,7 +4,7 @@ wget https://github.com/mikefarah/yq/releases/download/v4.24.5/yq_linux_amd64 -O
 
 cat ${BUILD_SOURCESDIRECTORY}/kustomize/metadata.yaml
 
-kubeConnection=$(~/yq ".environments[] | select(.name==\"${DEPLOYMENTENVIRONMENT}\") | .kubernetes.aksName" ${BUILD_SOURCESDIRECTORY}/kustomize/metadata.yaml)
+kubeConnection=$(~/yq ".environments[] | select(.name==\"${DEPLOYENVIRONMENT}\") | .kubernetes.aksName" ${BUILD_SOURCESDIRECTORY}/kustomize/metadata.yaml)
 
 # set pipeline variable kubeConnection
 echo "set pipeline variable: kubeConnection=${kubeConnection}"
