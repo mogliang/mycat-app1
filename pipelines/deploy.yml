@@ -7,8 +7,8 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- script: scripts/load-env-variable.yaml
-  displayName: 'Run script'
+- script: scripts/load-env-variable.sh
+  displayName: 'Load pipeline variable from metadata'
 
 - task: Kubernetes@1
   displayName: Deploy app1
