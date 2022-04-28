@@ -7,7 +7,7 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- script: scripts/load-env-variable.sh
+- script: $(Build.SourcesDirectory)/pipelines/scripts/load-env-variable.sh
   displayName: 'Load pipeline variable from metadata'
 
 - task: Kubernetes@1
