@@ -14,6 +14,8 @@ steps:
     echo "##vso[task.setvariable variable=kubeConnection;isoutput=true]$kubeConnection"
   name: loadMetadata
 
+- bash: |
+    echo $(loadMetadata.kubeConnection)
 - task: Kubernetes@1
   displayName: Deploy app1
   inputs:
