@@ -4,24 +4,19 @@
 # https://aka.ms/yaml
 
 variables:
-  loadMetadata.kubeConnection: ''
-  kubeConnection: ''
+  kubeConnection:
 
 jobs:
 - job: Deploy
   pool:
     vmImage: ubuntu-latest
   steps:
-  - bash: |
-      wget https://github.com/mikefarah/yq/releases/download/v4.24.5/yq_linux_amd64 -O ~/yq && chmod +x ~/yq
-      kubeConnection=$(~/yq ".environments[] | select(.name==\"${DEPLOYENVIRONMENT}\") | .kubernetes.aksName" ${BUILD_SOURCESDIRECTORY}/kustomize/metadata.yaml)
-      echo "set pipeline variable: kubeConnection=${kubeConnection}"
-      echo "##vso[task.setvariable variable=kubeConnection;isoutput=true]$kubeConnection"
-    name: loadMetadata
-
-  - bash: |
-      echo $(loadMetadata.kubeConnection)
-      echo $(kubeConnection)
-  - template: deploy2.yaml
-    parameters:
-      kubeConnection2: $(loadMetadata.kubeConnection)
+  - task: Kubernetes@1
+    displayName: Deploy app1
+    inputs:
+      connectionType: 'Kubernetes Service Connection'
+      kubernetesServiceEndpoint: '$(kubeConnection)'
+      command: 'apply'
+      arguments: '-k $(Build.SourcesDirectory)/kustomize/environments/$(deployEnvironment)'
+      secretType: 'dockerRegistry'
+      containerRegistryType: 'Azure Container Registry'
