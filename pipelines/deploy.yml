@@ -22,12 +22,6 @@ jobs:
   - bash: |
       echo $(loadMetadata.kubeConnection)
       echo $(kubeConnection)
-  - task: Kubernetes@1
-    displayName: Deploy app1
-    inputs:
-      connectionType: 'Kubernetes Service Connection'
-      kubernetesServiceEndpoint: "$(loadMetadata.kubeConnection)"
-      command: 'apply'
-      arguments: '-k $(Build.SourcesDirectory)/kustomize/environments/$(deployEnvironment)'
-      secretType: 'dockerRegistry'
-      containerRegistryType: 'Azure Container Registry'
+  - template: $(Build.SourcesDirectory)/pipelines/deploy2.yaml
+    parameters:
+      kubeConnection2: $(loadMetadata.kubeConnection)
