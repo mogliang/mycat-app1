@@ -7,7 +7,7 @@ metadata:
     app: app1
     tier: fe
 data:
-  appsettings.json: |
+  app1.fe.appsettings.json: |
     {
       "AppInfo": {
         "Title": "Today's Cats",

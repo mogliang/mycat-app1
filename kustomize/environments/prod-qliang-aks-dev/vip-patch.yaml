@@ -1,0 +1,8 @@
+#service
+apiVersion: v1
+kind: Service
+metadata:
+  name: app1-service
+  namespace: app1
+spec:
+  loadBalancerIP: 20.127.105.102

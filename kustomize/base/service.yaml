@@ -7,10 +7,9 @@ metadata:
   name: app1-service
   namespace: app1
   annotations:
-    service.beta.kubernetes.io/azure-dns-label-name: qliang-mycat
 spec:
   type: LoadBalancer
-  loadBalancerIP: 20.127.105.102
+  loadBalancerIP: 0.0.0.0
   selector:
     app: app1
     tier: fe

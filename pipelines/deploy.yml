@@ -7,9 +7,7 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- script: |
-    echo This pipeline deploy demo app https://github.com/mogliang/mycat-app1 to environment $(deployEnvironment).
-    echo Good luck!
+- script: scripts/load-env-variable.yaml
   displayName: 'Run script'
 
 - task: Kubernetes@1

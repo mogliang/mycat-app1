@@ -34,7 +34,7 @@ spec:
           driver: file.csi.azure.com
           volumeAttributes:
             secretName: app1storage-secret
-            shareName: qliangaksapp1share
+            shareName: app1fileshare
       - name: appsettings
         configMap:
           name: app1-config

@@ -1,10 +1,9 @@
-namespace: app1
+namespace: preprodapp1
 
 bases:
   - ../../base
 
 patches:
-  - fileshare-patch.yaml
   - vip-patch.yaml
 
 configMapGenerator:

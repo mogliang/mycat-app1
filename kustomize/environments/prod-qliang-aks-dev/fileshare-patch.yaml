@@ -1,0 +1,14 @@
+# deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app1-deployment
+  namespace: app1
+spec:
+  template:
+    spec:
+      volumes:
+      - name: azure
+        csi:
+          volumeAttributes:
+            shareName: qliangaksapp1share
