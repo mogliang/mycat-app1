@@ -8,7 +8,8 @@ pool:
 
 steps:
 - task: ShellScript@2
-  displayName: 'Load pipeline variable from metadata'
+  name: loadMetadata
+  displayName: 'Load metadata'
   inputs: 
     scriptPath: $(Build.SourcesDirectory)/pipelines/scripts/load-env-variable.sh
 
@@ -16,7 +17,7 @@ steps:
   displayName: Deploy app1
   inputs:
     connectionType: 'Kubernetes Service Connection'
-    kubernetesServiceEndpoint: '$(kubeConnection)'
+    kubernetesServiceEndpoint: '$(loadMetadata.kubeConnection)'
     command: 'apply'
     arguments: '-k $(Build.SourcesDirectory)/kustomize/environments/$(deployEnvironment)'
     secretType: 'dockerRegistry'
