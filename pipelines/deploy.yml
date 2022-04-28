@@ -22,7 +22,7 @@ jobs:
     displayName: Deploy app1
     inputs:
       connectionType: 'Kubernetes Service Connection'
-      kubernetesServiceEndpoint: "$(kubeConnection)"
+      kubernetesServiceEndpoint: "$(loadMetadata.kubeConnection)"
       command: 'apply'
       arguments: '-k $(Build.SourcesDirectory)/kustomize/environments/$(deployEnvironment)'
       secretType: 'dockerRegistry'
