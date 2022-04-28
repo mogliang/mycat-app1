@@ -22,6 +22,6 @@ jobs:
   - bash: |
       echo $(loadMetadata.kubeConnection)
       echo $(kubeConnection)
-  - template: $(Build.SourcesDirectory)/pipelines/deploy2.yaml
+  - template: deploy2.yaml
     parameters:
       kubeConnection2: $(loadMetadata.kubeConnection)
