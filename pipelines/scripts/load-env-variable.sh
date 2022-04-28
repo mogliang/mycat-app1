@@ -7,4 +7,5 @@ cat ${BUILD_SOURCESDIRECTORY}/kustomize/metadata.yaml
 kubeConnection=$(~/yq ".environments[] | select(.name==\"${DEPLOYMENTENVIRONMENT}\") | .kubernetes.aksName" ${BUILD_SOURCESDIRECTORY}/kustomize/metadata.yaml)
 
 # set pipeline variable kubeConnection
+echo "set pipeline variable: kubeConnection=${kubeConnection}"
 echo "##vso[task.setvariable variable=kubeConnection;isreadonly=true]$kubeConnection"
