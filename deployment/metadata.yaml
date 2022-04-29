@@ -9,11 +9,13 @@ environments:
       accountName: qliangaksapp1
       location: eastus
       shareName: qliangaksapp1share
+    slb:
+      address: 20.127.105.102
   kubernetes:
     aksResourceGroup: qliang-aks
     aksName: qliang-dev-aks
 - name: preprod-qliang-aks-dev
-  dns: preprodmycat
+  dns: mycatpreprod
   appNamespace: preprodapp1
   subscription: EdgeZone_Fiji_StorageService_Dev
   resources:
@@ -22,6 +24,23 @@ environments:
       accountName: qliangaksapp12
       location: eastus
       shareName: app1fileshare
+    slb:
+      address: 20.119.69.89
+  kubernetes:
+    aksResourceGroup: qliang-aks
+    aksName: qliang-dev-aks
+- name: stage-qliang-aks-dev
+  dns: mycatstage
+  appNamespace: stageapp1
+  subscription: EdgeZone_Fiji_StorageService_Dev
+  resources:
+    storage:
+      resourceGroup: qliang-aks
+      accountName: qliangaksapp1stage
+      location: eastus
+      shareName: app1fileshare
+    slb:
+      address: 20.124.215.58
   kubernetes:
     aksResourceGroup: qliang-aks
     aksName: qliang-dev-aks

@@ -6,19 +6,19 @@ readonly STORAGE_SHARE_NAME="app1fileshare"
 SUBSCRIPTION_NAME=EdgeZone_Fiji_StorageService_Dev
 
 # DNS
-SITE_DNS=preprod-mycat
+SITE_DNS=mycatstage
 
 # AKS variable
 AKS_RESOURCE_GROUP=qliang-aks
 AKS_NAME=qliang-dev-aks
 
 # Storage variable
-STORAGE_ACCOUNT=qliangaksapp12
+STORAGE_ACCOUNT=qliangaksapp1stage
 STORAGE_RESOURCE_GROUP=qliang-aks
 STORAGE_LOCATION=eastus
 
 # AKS deployment variable
-AKS_NAMESPACE=preprodapp1
+AKS_NAMESPACE=stageapp1
 
 ###################### Init connection #########################
 az account set --subscription $SUBSCRIPTION_NAME

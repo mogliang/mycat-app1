@@ -1,0 +1,17 @@
+namespace: stageapp1
+
+bases:
+  - ../../base
+
+patches:
+  - vip-patch.yaml
+
+configMapGenerator:
+- name: app1-config
+  namespace: app1
+  files:
+    - app1.fe.appsettings.json
+
+images:
+- name: qliang.azurecr.io/app1.fe-image
+  newTag: '22'
