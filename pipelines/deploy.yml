@@ -14,6 +14,6 @@ jobs:
       connectionType: 'Kubernetes Service Connection'
       kubernetesServiceEndpoint: '$(kubeConnection)'
       command: 'apply'
-      arguments: '-k $(Build.SourcesDirectory)/kustomize/environments/$(deployEnvironment)'
+      arguments: '-k $(Build.SourcesDirectory)/deployment/kustomize/environments/$(deployEnvironment)'
       secretType: 'dockerRegistry'
       containerRegistryType: 'Azure Container Registry'
