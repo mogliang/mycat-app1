@@ -3,7 +3,7 @@ readonly STORAGE_SHARE_NAME="app1fileshare"
 
 ###################### Init variables below ########################
 # Subscription
-SUBSCRIPTION_NAME=EdgeZone_Fiji_StorageService_Dev
+SUBSCRIPTION_NAME=<hidden>
 
 # DNS
 SITE_DNS=mycatstage

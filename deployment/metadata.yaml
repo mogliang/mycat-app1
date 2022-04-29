@@ -2,7 +2,7 @@ environments:
 - name: prod-qliang-aks-dev
   dns: mycat
   appNamespace: app1
-  subscription: EdgeZone_Fiji_StorageService_Dev
+  subscription: <hidden>
   resources:
     storage:
       resourceGroup: qliang-aks
@@ -17,7 +17,7 @@ environments:
 - name: preprod-qliang-aks-dev
   dns: mycatpreprod
   appNamespace: preprodapp1
-  subscription: EdgeZone_Fiji_StorageService_Dev
+  subscription: <hidden>
   resources:
     storage:
       resourceGroup: qliang-aks
@@ -32,7 +32,7 @@ environments:
 - name: stage-qliang-aks-dev
   dns: mycatstage
   appNamespace: stageapp1
-  subscription: EdgeZone_Fiji_StorageService_Dev
+  subscription: <hidden>
   resources:
     storage:
       resourceGroup: qliang-aks
