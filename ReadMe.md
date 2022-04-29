@@ -9,6 +9,8 @@ This is a study project, practicing services and tools below:
     - Continuous deployment on preprod environment.
     - Release train management. 
 
+See demo site: http://mycat.2ae1f3c259e049cd9483.eastus.aksapp.io/
+
 ```
                                             oOOOOOOOOOOOOOOoo..
                                              """""""""""OOOOOOOOo.
