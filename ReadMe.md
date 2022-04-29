@@ -8,3 +8,21 @@ This is a study project, practicing services and tools below:
 4. Use Azure pipeline for 
     - Continuous deployment on preprod environment.
     - Release train management. 
+
+```
+                                            oOOOOOOOOOOOOOOoo..
+                                             """""""""""OOOOOOOOo.
+                                           ..oooooooo..    `""OOOOO.
+                                       .oOOOOOOOOOOOOOOOOo     OOOOO
+                     ..ooOOOOOOo..oooOOOOOOOOOOOOOOOOOOOOOOoooOOOOO'
+            .Oo...ooOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO"'
+        .oooOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO"~~
+          \oOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO'
+           OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOoOOOOOOOOOOOOOOO'
+          __\OO/"    "OOOOOOOOOOOOOOOOOOOO`OOOOOOOOOOOOO"
+            /|\   .oOOooo- `OOOOOOOO""   .O`OOOOOOOOOO'
+  oO--.        .oOOOO"~    .OOOOO'      QQOOO`OOOOOOOOOo
+  +o--o`----QQOOO"~       .OOOOO'                 `OOOOO
+                         .OOOO'                  QQQQO"
+                       QQQQO"
+```
