@@ -1,5 +1,6 @@
-# Docker
-# Build a Docker image
+# Build App1 Image - CI
+
+# Doc Build a Docker image
 # https://docs.microsoft.com/azure/devops/pipelines/languages/docker
 
 trigger:
