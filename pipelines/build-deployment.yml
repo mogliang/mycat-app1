@@ -18,7 +18,8 @@ steps:
     CleanTargetFolder: true
     preserveTimestamp: true
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: '$(Build.ArtifactStagingDirectory)/deployment'
+    artifact: 'app1-deployment'
+    publishLocation: 'pipeline'
