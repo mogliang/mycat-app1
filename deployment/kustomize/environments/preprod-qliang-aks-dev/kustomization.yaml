@@ -9,7 +9,6 @@ patches:
 configMapGenerator:
 - name: app1-config
   namespace: app1
-  behavior: replace
   files:
     - app1.fe.appsettings.json
 
