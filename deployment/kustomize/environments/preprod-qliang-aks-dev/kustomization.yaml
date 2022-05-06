@@ -14,4 +14,4 @@ configMapGenerator:
 
 images:
 - name: qliang.azurecr.io/app1.fe-image
-  newTag: '22'
+  newTag: '59'
