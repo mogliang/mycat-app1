@@ -26,3 +26,6 @@ exit
 
 ## sometimes, you need a restart
 `kubectl rollout restart deployment app1-deployment -n app1`
+
+## get deployment status
+`kubectl get deployment app1-deployment -n app1 -o=jsonpath='{.status}'`
