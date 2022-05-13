@@ -1,0 +1,15 @@
+# deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app1-deployment
+  namespace: app1
+spec:
+  template:
+    metadata:
+      labels:
+        app: app1
+        tier: fe
+    spec:
+      imagePullSecrets:
+      - name: qliang-acr-secret

@@ -23,6 +23,7 @@ This is a study project, practicing services and tools below:
 - `Preprod` http://mycatpreprod.2ae1f3c259e049cd9483.eastus.aksapp.io/
 - `Stage` http://mycatstage.2ae1f3c259e049cd9483.eastus.aksapp.io/
 - `Production` http://mycat.2ae1f3c259e049cd9483.eastus.aksapp.io/
+- `ClusterAPI-CxCluster2-Prod` http://mycatcapicxcluster2prod.2ae1f3c259e049cd9483.eastus.aksapp.io/
 
 ```
                                             oOOOOOOOOOOOOOOoo..
