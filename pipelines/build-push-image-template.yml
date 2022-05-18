@@ -8,9 +8,9 @@ parameters:
   - name: component
     displayName: 'component name. Required'
     type: string
-
-variables:
-  imageName: '$(component)-image'
+  - name: imageName
+    displayName: 'image name. Required'
+    type: string
 
 steps:
   - task: Docker@2

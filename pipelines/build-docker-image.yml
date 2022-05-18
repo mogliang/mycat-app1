@@ -27,13 +27,16 @@ stages:
         version: $(version)
         registry: 'qrer'
         component: 'app1-fe'
+        imageName: 'app1-fe-image'
     - template: build-push-image-template.yml
       parameters:
         version: $(version)
         registry: $(registry)
         component: 'app1-be'
+        imageName: 'app1-be-image'
     - template: build-push-image-template.yml
       parameters:
         version: $(version)
         registry: $(registry)
         component: 'app1-runner'
+        imageName: 'app1-runner-image'
