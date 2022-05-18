@@ -14,24 +14,24 @@ parameters:
 
 steps:
 - task: Docker@2
-  displayName: login acr $(parameters.registry)
+  displayName: login acr ${{ parameters.registry }}
   inputs:
-    containerRegistry: '$(parameters.registry)'
+    containerRegistry: '${{ parameters.registry }}'
     command: 'login'
 - task: Docker@2
-  displayName: Build image $(parameters.imageName)
+  displayName: Build image ${{ parameters.imageName }}
   inputs:
     command: build
-    dockerfile: '$(Build.SourcesDirectory)/src/$(parameters.component)/dockerfile'
-    arguments: '--build-arg VERSION=$(parameters.version)'
-    repository: $(parameters.imageName)
+    dockerfile: '${{ Build.SourcesDirectory }}/src/${{ parameters.component }}/dockerfile'
+    arguments: '--build-arg VERSION=${{ parameters.version }}'
+    repository: ${{ parameters.imageName }}
     tags: |
-      $(parameters.version)
+      ${{ parameters.version }}
 - task: Docker@2
-  displayName: Push image $(parameters.imageName)
+  displayName: Push image ${{ parameters.imageName }}
   inputs:
-    containerRegistry: '$(parameters.registry)'
-    repository: '$(parameters.imageName)'
+    containerRegistry: '${{ parameters.registry }}'
+    repository: '${{ parameters.imageName }}'
     command: 'push'
 - script: echo build succeed
-  displayName: $(parameters.imageName):$(parameters.version) pushed
+  displayName: ${{ parameters.imageName }}:${{ parameters.version }} pushed
