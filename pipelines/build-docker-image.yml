@@ -22,28 +22,19 @@ stages:
     displayName: Build
     pool:
       vmImage: ubuntu-latest
-    variables:
-          imageName: '$(component)-image'
     steps:
-    - task: Docker@2
-      displayName: login acr $(registry)
-      inputs:
-        containerRegistry: '$(registry)'
-        command: 'login'
-    - task: Docker@2
-      displayName: Build image $(imageName)
-      inputs:
-        command: build
-        dockerfile: '$(Build.SourcesDirectory)/src/$(component)/dockerfile'
-        arguments: '--build-arg VERSION=$(version)'
-        repository: $(imageName)
-        tags: |
-          $(version)
-    - task: Docker@2
-      displayName: Push image $(imageName)
-      inputs:
-        containerRegistry: '$(registry)'
-        repository: '$(imageName)'
-        command: 'push'
-    - script: echo build succeed
-      displayName: $(imageName):$(version) pushed
+    - template: build-push-image-template.yml
+      parameters:
+        version: $(version)
+        registry: $(registry)
+        component: 'app1-fe'
+    - template: build-push-image-template.yml
+      parameters:
+        version: $(version)
+        registry: $(registry)
+        component: 'app1-be'
+    - template: build-push-image-template.yml
+      parameters:
+        version: $(version)
+        registry: $(registry)
+        component: 'app1-runner'
