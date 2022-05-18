@@ -12,7 +12,6 @@ resources:
 variables:
   version: '$(Build.BuildId)'
   registry: 'qliang-acr'
-  component: '$(AppComponent)'
 
 stages:
 - stage: Build
