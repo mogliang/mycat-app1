@@ -25,7 +25,7 @@ stages:
     - template: build-push-image-template.yml
       parameters:
         version: $(version)
-        registry: $(registry)
+        registry: 'qrer'
         component: 'app1-fe'
     - template: build-push-image-template.yml
       parameters:
