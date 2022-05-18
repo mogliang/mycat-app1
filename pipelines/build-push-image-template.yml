@@ -9,6 +9,9 @@ parameters:
     displayName: 'component name. Required'
     type: string
 
+variables:
+  imageName: '$(component)-image'
+
 steps:
   - task: Docker@2
     displayName: login acr $(registry)
