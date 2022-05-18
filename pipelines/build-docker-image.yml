@@ -9,10 +9,6 @@ trigger:
 resources:
 - repo: self
 
-variables:
-  version: '$(Build.BuildId)'
-  registry: 'qliang-acr'
-
 stages:
 - stage: Build
   displayName: Build image
