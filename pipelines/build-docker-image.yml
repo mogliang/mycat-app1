@@ -9,30 +9,27 @@ trigger:
 resources:
 - repo: self
 
-stages:
-- stage: Build
-  displayName: Build image
-  jobs:
-  - job: Build
-    displayName: Build
-    pool:
-      vmImage: ubuntu-latest
-    steps:
-    - template: build-push-image-template.yml
-      parameters:
-        version: $(Build.BuildId)
-        registry: 'qliang-acr'
-        component: 'app1-fe'
-        imageName: 'app1-fe-image'
-    - template: build-push-image-template.yml
-      parameters:
-        version: $(Build.BuildId)
-        registry: 'qliang-acr'
-        component: 'app1-be'
-        imageName: 'app1-be-image'
-    - template: build-push-image-template.yml
-      parameters:
-        version: $(Build.BuildId)
-        registry: 'qliang-acr'
-        component: 'app1-runner'
-        imageName: 'app1-runner-image'
+jobs:
+- job: Build
+  displayName: Build
+  pool:
+    vmImage: ubuntu-latest
+  steps:
+  - template: build-push-image-template.yml
+    parameters:
+      version: $(Build.BuildId)
+      registry: 'qliang-acr'
+      component: 'app1-fe'
+      imageName: 'app1-fe-image'
+  - template: build-push-image-template.yml
+    parameters:
+      version: $(Build.BuildId)
+      registry: 'qliang-acr'
+      component: 'app1-be'
+      imageName: 'app1-be-image'
+  - template: build-push-image-template.yml
+    parameters:
+      version: $(Build.BuildId)
+      registry: 'qliang-acr'
+      component: 'app1-runner'
+      imageName: 'app1-runner-image'
