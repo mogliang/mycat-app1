@@ -1,37 +1,37 @@
 parameters:
-  - name: version
-    displayName: 'build version. Required'
-    type: string
-  - name: registry
-    displayName: 'Registry. Required'
-    type: string
-  - name: component
-    displayName: 'component name. Required'
-    type: string
-  - name: imageName
-    displayName: 'image name. Required'
-    type: string
+- name: version
+  displayName: 'build version. Required'
+  type: string
+- name: registry
+  displayName: 'Registry. Required'
+  type: string
+- name: component
+  displayName: 'component name. Required'
+  type: string
+- name: imageName
+  displayName: 'image name. Required'
+  type: string
 
 steps:
-  - task: Docker@2
-    displayName: login acr $(registry)
-    inputs:
-      containerRegistry: '$(registry)'
-      command: 'login'
-  - task: Docker@2
-    displayName: Build image $(imageName)
-    inputs:
-      command: build
-      dockerfile: '$(Build.SourcesDirectory)/src/$(component)/dockerfile'
-      arguments: '--build-arg VERSION=$(version)'
-      repository: $(imageName)
-      tags: |
-        $(version)
-  - task: Docker@2
-    displayName: Push image $(imageName)
-    inputs:
-      containerRegistry: '$(registry)'
-      repository: '$(imageName)'
-      command: 'push'
-  - script: echo build succeed
-    displayName: $(imageName):$(version) pushed
+- task: Docker@2
+  displayName: login acr $(registry)
+  inputs:
+    containerRegistry: '$(registry)'
+    command: 'login'
+- task: Docker@2
+  displayName: Build image $(imageName)
+  inputs:
+    command: build
+    dockerfile: '$(Build.SourcesDirectory)/src/$(component)/dockerfile'
+    arguments: '--build-arg VERSION=$(version)'
+    repository: $(imageName)
+    tags: |
+      $(version)
+- task: Docker@2
+  displayName: Push image $(imageName)
+  inputs:
+    containerRegistry: '$(registry)'
+    repository: '$(imageName)'
+    command: 'push'
+- script: echo build succeed
+  displayName: $(imageName):$(version) pushed
