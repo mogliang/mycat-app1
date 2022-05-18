@@ -22,7 +22,7 @@ steps:
   displayName: Build image ${{ parameters.imageName }}
   inputs:
     command: build
-    dockerfile: '${{ Build.SourcesDirectory }}/src/${{ parameters.component }}/dockerfile'
+    dockerfile: '$(Build.SourcesDirectory)/src/${{ parameters.component }}/dockerfile'
     arguments: '--build-arg VERSION=${{ parameters.version }}'
     repository: ${{ parameters.imageName }}
     tags: |
