@@ -17,8 +17,7 @@ stages:
 - stage: Build
   displayName: Build image
   jobs:
-  - job: Build 
-    displayName: Build
+  - job: Build app1.fe
     pool:
       vmImage: ubuntu-latest
     steps:
@@ -28,12 +27,20 @@ stages:
         registry: $(registry)
         component: 'app1.fe'
         imageName: 'app1.fe-image'
+  - job: Build app1.be
+    pool:
+      vmImage: ubuntu-latest
+    steps:
     - template: build-push-image-template.yml
       parameters:
         version: $(version)
         registry: $(registry)
         component: 'app1.be'
         imageName: 'app1.be-image'
+  - job: Build app1.runner
+    pool:
+      vmImage: ubuntu-latest
+    steps:
     - template: build-push-image-template.yml
       parameters:
         version: $(version)
