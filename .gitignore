@@ -1,7 +1,10 @@
 */bin/**
 */obj/**
 */out/**
+
 src/*/bin/**
 src/*/obj/**
 src/*/out/**
+
 /.vs
+**/.vs

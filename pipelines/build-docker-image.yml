@@ -12,6 +12,7 @@ resources:
 variables:
   version: '$(Build.BuildId)'
   registry: 'qliang-acr'
+  component: '$(Component)'
 
 stages:
 - stage: Build
@@ -22,7 +23,7 @@ stages:
     pool:
       vmImage: ubuntu-latest
     variables:
-          imageName: 'app1.fe-image'
+          imageName: '$(component)-image'
     steps:
     - task: Docker@2
       displayName: login acr $(registry)
@@ -33,7 +34,7 @@ stages:
       displayName: Build image $(imageName)
       inputs:
         command: build
-        dockerfile: '$(Build.SourcesDirectory)/app1.fe/dockerfile'
+        dockerfile: '$(Build.SourcesDirectory)/src/$(component)/dockerfile'
         arguments: '--build-arg VERSION=$(version)'
         repository: $(imageName)
         tags: |
