@@ -40,6 +40,7 @@ public class IndexModel : PageModel
             taskResultTableProvider.Initalize();
             var now = DateTimeOffset.Now;
             TaskResults = taskResultTableProvider.GetTaskResults(now.AddDays(-1), now).ToList();
+            TaskResults.OrderByDescending(en => en.Timestamp);
         }
         catch (Exception ex)
         {
