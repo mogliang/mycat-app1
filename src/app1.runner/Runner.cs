@@ -53,10 +53,11 @@ namespace app1.runner
                 {
                     try
                     {
+                        var partitionKey = $"{runId}-{Environment.MachineName}";
                         await _taskResultAzTableProvider.AddTaskResult(new TaskResultEntity
                         {
-                            PartitionKey = result.StartTime.TimeString(),
-                            RowKey = result.Host,
+                            PartitionKey = partitionKey,
+                            RowKey = partitionKey,
                             Host = result.Host,
                             Message = result.Message,
                             RunId = result.RunId,

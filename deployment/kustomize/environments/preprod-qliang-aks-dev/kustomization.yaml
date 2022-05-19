@@ -15,8 +15,8 @@ configMapGenerator:
 
 images:
 - name: qliang.azurecr.io/app1.fe-image
-  newTag: '98'
+  newTag: '100'
 - name: qliang.azurecr.io/app1.be-image
-  newTag: '98'
+  newTag: '100'
 - name: qliang.azurecr.io/app1.runner-image
-  newTag: '98'
+  newTag: '100'
