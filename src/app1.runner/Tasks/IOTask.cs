@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using app1.common;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -17,9 +18,9 @@ namespace app1.runner.Tasks
 
         public string DirectoryPath { get; internal set; }
 
-        public override async Task<TaskResult> RunImpl()
+        public override async Task<TaskResult> RunImpl(string RunId)
         {
-            var workPath = Path.Combine(DirectoryPath, $"{Name}-{Environment.MachineName}-{DateTimeOffset.Now.ToString("yyyyMMddTHHmmss")}");
+            var workPath = Path.Combine(DirectoryPath, $"{Name}-{Environment.MachineName}-{DateTimeOffset.Now.TimeString()}");
             var workDir = new DirectoryInfo(workPath);
             workDir.Create();
 

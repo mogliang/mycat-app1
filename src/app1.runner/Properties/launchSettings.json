@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "app1.runner": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "AZ_TABLE_CONN": ""
+      },
+      "remoteDebugEnabled": false
+    }
+  }
+}

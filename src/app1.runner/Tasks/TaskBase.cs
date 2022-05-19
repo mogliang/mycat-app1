@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -45,15 +46,22 @@ namespace app1.runner.Tasks
             }
         }
 
-        public async Task<TaskResult> Run()
+        public async Task<TaskResult> Run(string RunId)
         {
             if (Enabled)
             {
+                DateTimeOffset startTime = DateTimeOffset.Now;
                 IsRunning = true;
                 Logger.LogInformation($"Begin to run task {Name}");
-                var result = await RunImpl();
+                var result = await RunImpl(RunId);
                 IsRunning = false;
                 Logger.LogInformation($"Run task {Name} Ends.");
+
+                result.RunId = RunId;
+                result.Host = Environment.MachineName;
+                result.StartTime = startTime;
+                result.DurationInMs = (int)(DateTimeOffset.Now - startTime).TotalMilliseconds;
+
                 return result;
             }
             else
@@ -63,7 +71,7 @@ namespace app1.runner.Tasks
             }
         }
 
-        public abstract Task<TaskResult> RunImpl();
+        public abstract Task<TaskResult> RunImpl(string RunId);
     }
 
     public class TaskResult
@@ -74,6 +82,10 @@ namespace app1.runner.Tasks
             Message = message;
         }
 
+        public string RunId { set; get; }
+        public DateTimeOffset StartTime { set; get; }
+        public int DurationInMs { set; get; }
+        public string Host { set; get; }
         public bool Success { get; set; }
         public string Message { get; set; }
     }

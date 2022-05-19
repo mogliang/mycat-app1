@@ -28,6 +28,13 @@ spec:
         - name: appsettings
           mountPath: /build/k8sconfig
           readOnly: true
+        env:
+        - name: AZ_TABLE_CONN
+          valueFrom:
+            secretKeyRef:
+              name: aztable-secret
+              key: connectionstr
+              optional: true
       volumes:
       - name: azure
         csi:
@@ -100,6 +107,13 @@ spec:
         - name: appsettings
           mountPath: /build/k8sconfig
           readOnly: true
+        env:
+        - name: AZ_TABLE_CONN
+          valueFrom:
+            secretKeyRef:
+              name: aztable-secret
+              key: connectionstr
+              optional: true
       volumes:
       - name: azure
         csi:

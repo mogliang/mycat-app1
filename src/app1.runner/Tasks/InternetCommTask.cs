@@ -17,7 +17,7 @@ namespace app1.runner.Tasks
         {
         }
 
-        public override async Task<TaskResult> RunImpl()
+        public override async Task<TaskResult> RunImpl(string RunId)
         {
             bool success = false;
             string message = string.Empty;
