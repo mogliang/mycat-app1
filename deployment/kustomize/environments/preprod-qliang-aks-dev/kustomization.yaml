@@ -11,7 +11,12 @@ configMapGenerator:
   namespace: app1
   files:
     - app1.fe.appsettings.json
+    - app1.runner.appsettings.json
 
 images:
 - name: qliang.azurecr.io/app1.fe-image
-  newTag: '63'
+  newTag: '82'
+- name: qliang.azurecr.io/app1.be-image
+  newTag: '82'
+- name: qliang.azurecr.io/app1.runner-image
+  newTag: '82'

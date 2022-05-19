@@ -26,7 +26,79 @@ spec:
         - name: azure
           mountPath: /mnt/azure
         - name: appsettings
-          mountPath: /app1.fe/k8sconfig
+          mountPath: /build/k8sconfig
+          readOnly: true
+      volumes:
+      - name: azure
+        csi:
+          driver: file.csi.azure.com
+          volumeAttributes:
+            secretName: app1storage-secret
+            shareName: app1fileshare
+      - name: appsettings
+        configMap:
+          name: app1-config
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: app1-be-statefulset
+  namespace: app1
+  labels:
+    app: app1
+spec:
+  selector:
+    matchLabels:
+      app: app1
+      component: app1.be
+  serviceName: app1-be-service
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: app1
+        component: app1.be
+    spec:
+      containers:
+      - name: app1-be
+        image: qliang.azurecr.io/app1.be-image:v0.4
+        ports:
+          - containerPort: 8011
+        volumeMounts:
+          - name: appsettings
+            mountPath: /build/k8sconfig
+      volumes:
+      - name: appsettings
+        configMap:
+          name: app1-config
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app1-runner-deployment
+  namespace: app1
+  labels:
+    app: app1
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: app1
+      component: app1.runner
+  template:
+    metadata:
+      labels:
+        app: app1
+        component: app1.runner
+    spec:
+      containers:
+      - name: app1-runner
+        image: qliang.azurecr.io/app1.runner-image:v0.4
+        volumeMounts:
+        - name: azure
+          mountPath: /mnt/azure
+        - name: appsettings
+          mountPath: /build/k8sconfig
           readOnly: true
       volumes:
       - name: azure

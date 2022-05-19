@@ -1,0 +1,25 @@
+{
+    "Logging": {
+        "LogLevel": {
+            "Default": "Information",
+            "Microsoft.AspNetCore": "Warning"
+        }
+    },
+    "AzDiskTask": {
+        "Enabled": "false",
+        "DiskMountPath": "C:\\temp\\azdisk"
+    },
+    "AzFileTask": {
+        "Enabled": "true",
+        "FileMountPath": "/mnt/azure"
+    },
+    "PodCommTask": {
+        "Enabled": "true",
+        "PodServiceUrlFormat": "http://app1-be-statefulset-{0}:8011/weatherforecast",
+        "PodCount": 3
+    },
+    "InternetCommTask": {
+        "Enabled": "true",
+        "ServiceUrls": "https://www.google.com;https://www.bing.com;https://www.baidu.com;http://app1-be-service:8080/weatherforecast"
+    }
+}

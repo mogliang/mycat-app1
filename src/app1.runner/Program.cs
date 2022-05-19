@@ -9,6 +9,7 @@ var host = Host.CreateDefaultBuilder(args)
     .ConfigureAppConfiguration(app =>
     {
         app.AddJsonFile("appsettings.json");
+        app.AddJsonFile("k8sconfig/app1.runner.appsettings.json", true);
     })
     .ConfigureServices(services =>
     {
