@@ -12,26 +12,23 @@
         <thead>
             <tr>
                 <th scope="col">RunId</th>
-                <th scope="col">Host</th>
                 <th scope="col">Result</th>
-                <th scope="col">Message</th>
+                <th scope="col">Details</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="text-start">
             @foreach (var result in Model.TaskResults)
             {
                 <tr>
-                    <th scope="row">
+                    <td >
                         @Html.DisplayFor(m=>result.RunId)
-                    </th>
-                    <td>
-                        @Html.DisplayFor(m=>result.Host)
                     </td>
                     <td>
                         @Html.CheckBoxFor(m=>result.Success)
                     </td>
                     <td>
                         <p style="white-space:pre;">@Html.DisplayFor(m=>result.Message)</p>
+                        <span>Host: @Html.DisplayFor(m=>result.Host)</span>
                     </td>
                 </tr>
             }

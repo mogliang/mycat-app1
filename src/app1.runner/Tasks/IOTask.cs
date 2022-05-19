@@ -43,7 +43,8 @@ namespace app1.runner.Tasks
             }
             catch (Exception ex)
             {
-                var message = $"io test failed with exception: {ex}";
+                var message = $"io test failed with exception: {ex.Message}";
+                Logger.LogError($"[{RunId}] error: {ex}");
                 return new TaskResult(false, message);
             }
 

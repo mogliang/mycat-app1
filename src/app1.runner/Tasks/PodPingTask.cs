@@ -35,7 +35,8 @@ namespace app1.runner.Tasks
                 catch (Exception ex)
                 {
                     success = false;
-                    message += $"Api call to {serviceUrl} failed. error: {ex}\n";
+                    message += $"Api call to {serviceUrl} failed. error: {ex.Message}\n";
+                    Logger.LogError($"[{RunId}] error: {ex}");
                 }
             }
 

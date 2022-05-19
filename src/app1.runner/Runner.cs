@@ -47,7 +47,7 @@ namespace app1.runner
             {
                 var runId = $"{DateTimeOffset.Now.TimeString()}-{task.Name}";
                 var result = await task.Run(runId);
-                _logger.LogInformation($"[{runId}-{task.Name}] result: {result.Success}, message: {result.Message}");
+                _logger.LogInformation($"[{runId}-{task.Name}] result: {result.Success}, message:\n{result.Message}");
 
                 if (_taskResultAzTableProvider != null)
                 {
