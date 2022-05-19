@@ -26,6 +26,7 @@ namespace app1.runner
             var azTableConn = Environment.GetEnvironmentVariable("AZ_TABLE_CONN");
             if (azTableConn != null)
             {
+                _logger.LogInformation("conn is " + azTableConn);
                 _taskResultAzTableProvider = new TaskResultAzTableProvider(azTableConn);
                 _taskResultAzTableProvider.Initalize();
             }
