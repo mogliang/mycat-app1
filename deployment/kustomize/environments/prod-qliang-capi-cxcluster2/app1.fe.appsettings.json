@@ -1,7 +1,8 @@
 {
     "AppInfo": {
-        "Title": "Today's Cats🐅",
+        "Title": "ClusterAPI Test",
         "SiteName": "prod-qliang-capi-cxcluster2-hosting",
-        "ShowMachineInfo": true
+        "ShowMachineInfo": true,
+        "AzTableName":"taskresultcapicxcluster2"
     }
 }

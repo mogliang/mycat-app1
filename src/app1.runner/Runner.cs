@@ -47,28 +47,32 @@ namespace app1.runner
             {
                 var runId = $"{DateTimeOffset.Now.TimeString()}-{task.Name}";
                 var result = await task.Run(runId);
-                _logger.LogInformation($"[{runId}-{task.Name}] result: {result.Success}, message:\n{result.Message}");
 
-                if (_taskResultAzTableProvider != null)
+                if(result!=null)
                 {
-                    try
+                    _logger.LogInformation($"[{runId}-{task.Name}] result: {result.Success}, message:\n{result.Message}");
+
+                    if (_taskResultAzTableProvider != null)
                     {
-                        var partitionKey = $"{runId}-{Environment.MachineName}";
-                        await _taskResultAzTableProvider.AddTaskResult(new TaskResultEntity
+                        try
                         {
-                            PartitionKey = partitionKey,
-                            RowKey = partitionKey,
-                            Host = result.Host,
-                            Message = result.Message,
-                            RunId = result.RunId,
-                            Success = result.Success,
-                            TaskName = task.Name,
-                            Timestamp = result.StartTime
-                        });
-                    }
-                    catch (Exception ex)
-                    {
-                        _logger.LogError($"Write az table failed. error: {ex}");
+                            var partitionKey = $"{runId}-{Environment.MachineName}";
+                            await _taskResultAzTableProvider.AddTaskResult(new TaskResultEntity
+                            {
+                                PartitionKey = partitionKey,
+                                RowKey = partitionKey,
+                                Host = result.Host,
+                                Message = result.Message,
+                                RunId = result.RunId,
+                                Success = result.Success,
+                                TaskName = task.Name,
+                                Timestamp = result.StartTime
+                            });
+                        }
+                        catch (Exception ex)
+                        {
+                            _logger.LogError($"Write az table failed. error: {ex}");
+                        }
                     }
                 }
             }

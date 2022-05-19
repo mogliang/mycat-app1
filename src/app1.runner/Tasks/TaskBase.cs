@@ -67,7 +67,7 @@ namespace app1.runner.Tasks
             else
             {
                 Logger.LogInformation($"Skip task {Name}");
-                return new TaskResult(true);
+                return null;
             }
         }
 
