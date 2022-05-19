@@ -3,7 +3,8 @@ ARG VERSION
 WORKDIR /build
 
 # Copy everything
-COPY . ./
+COPY ../ ./
+WORKDIR /build/app1.runner
 # Restore as distinct layers
 RUN dotnet restore
 # Build and publish a release
@@ -12,5 +13,5 @@ RUN dotnet publish -c Release -o out -p:Version="$VERSION"
 # Build runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:6.0
 WORKDIR /build
-COPY --from=build-env /build/out .
+COPY --from=build-env /build/app1.runner/out .
 ENTRYPOINT ["dotnet", "app1.runner.dll"]

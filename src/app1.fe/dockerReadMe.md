@@ -1,11 +1,11 @@
 ## create image
-`docker build -t app1.fe-image:v0.2 -f dockerfile .`
+`docker build -t app1.fe-image:v0.2 --build-arg VERSION=1 -f dockerfile .`
 
 ## show image
 `docker image ls`
 
 ## run
-`docker run -d -p 8088:8011 --name app1.fe app1.fe-image:v0.2`
+`docker run -d -p 8088:8011 --name app1.fe app1.fe-image:v0.2` 
 
 ## stop
 `docker container stop app1.fe`
