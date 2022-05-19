@@ -38,5 +38,8 @@
     "InternetCommTask": {
         "Enabled": "true",
         "ServiceUrls": "https://www.google.com;https://www.bing.com;https://www.baidu.com;http://app1-be-service:8080/weatherforecast;http://20.119.69.89:8080/weatherforecast"
+    },
+    "Runner":{
+        "AzTableName":"taskresultpreprodapp1"
     }
 }

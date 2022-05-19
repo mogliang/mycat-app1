@@ -11,20 +11,19 @@ using System.Threading.Tasks;
 namespace app1.runner.Tasks
 {
     [Schedule]
-    public class InternetCommTask : IOTask
+    public class PodPingTask : IOTask
     {
-        public InternetCommTask(ILogger<PodCommTask> logger, IConfiguration configuration) : base(logger, configuration)
+        public PodPingTask(ILogger<PodPingTask> logger, IConfiguration configuration) : base(logger, configuration)
         {
         }
 
         public override async Task<TaskResult> RunImpl(string RunId)
         {
-            bool success = false;
             string message = string.Empty;
-            var urlList = ServiceUrls.Split(";");
-
-            foreach (var serviceUrl in urlList)
+            bool success = true;
+            for (int i = 0; i < PodCount; i++)
             {
+                var serviceUrl = new Uri(string.Format(PodServiceUrlFormat, i));
                 try
                 {
                     Stopwatch stopwatch = Stopwatch.StartNew();
@@ -44,6 +43,9 @@ namespace app1.runner.Tasks
         }
 
         [Configuration]
-        public string ServiceUrls { get; set; }
+        public string PodServiceUrlFormat { get; set; }
+
+        [Configuration]
+        public int PodCount { get; set; }
     }
 }

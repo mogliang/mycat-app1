@@ -5,20 +5,21 @@ namespace app1.common;
 
 public class TaskResultAzTableProvider
 {
-    public const string TaskResultName = "TaskResult";
+    string _taskResultTableName;
     string _connStr;
     TableClient _tableClient;
 
-    public TaskResultAzTableProvider(string connStr)
+    public TaskResultAzTableProvider(string connStr, string taskResultTableName)
     {
         _connStr = connStr;
+        _taskResultTableName = taskResultTableName;
     }
 
     public void Initalize()
     {
         var tableServiceClient = new TableServiceClient(_connStr);
-        tableServiceClient.CreateTableIfNotExists(TaskResultName);
-        _tableClient = tableServiceClient.GetTableClient(TaskResultName);
+        tableServiceClient.CreateTableIfNotExists(_taskResultTableName);
+        _tableClient = tableServiceClient.GetTableClient(_taskResultTableName);
     }
 
     public async Task AddTaskResult(TaskResultEntity taskResultEntity)

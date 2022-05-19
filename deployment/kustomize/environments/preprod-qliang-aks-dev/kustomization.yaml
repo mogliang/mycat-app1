@@ -19,4 +19,4 @@ images:
 - name: qliang.azurecr.io/app1.be-image
   newTag: '89'
 - name: qliang.azurecr.io/app1.runner-image
-  newTag: '90'
+  newTag: '92'

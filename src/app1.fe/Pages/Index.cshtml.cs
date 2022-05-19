@@ -26,10 +26,17 @@ public class IndexModel : PageModel
 
     public async Task OnGetAsync()
     {
+        // load title
+        this.AppInfo = Configuration.GetSection("AppInfo").Get<AppInfo>();
+        this.MachineInfo = this.AppInfo?.ShowMachineInfo == true ? "Host:" + Environment.MachineName : string.Empty;
+
+        // load version info
+        this.AppVersion = "Version:" + Assembly.GetExecutingAssembly().GetName().Version.ToString();
+
         try
         {
             var azTableConn = Environment.GetEnvironmentVariable("AZ_TABLE_CONN");
-            var taskResultTableProvider = new TaskResultAzTableProvider(azTableConn);
+            var taskResultTableProvider = new TaskResultAzTableProvider(azTableConn, this.AppInfo.AzTableName);
             taskResultTableProvider.Initalize();
             var now = DateTimeOffset.Now;
             TaskResults = taskResultTableProvider.GetTaskResults(now.AddDays(-1), now).ToList();
@@ -40,13 +47,6 @@ public class IndexModel : PageModel
             _logger.LogError(message);
             throw new ArgumentException(message, ex);
         }
-
-        // load title
-        this.AppInfo = Configuration.GetSection("AppInfo").Get<AppInfo>();
-        this.MachineInfo = this.AppInfo?.ShowMachineInfo == true ? "Host:" + Environment.MachineName : string.Empty;
-
-        // load version info
-        this.AppVersion = "Version:" + Assembly.GetExecutingAssembly().GetName().Version.ToString();
     }
 }
 
@@ -55,4 +55,5 @@ public class AppInfo
     public string Title { set; get; }
     public string SiteName { set; get; }
     public bool ShowMachineInfo { set; get; }
+    public string AzTableName { set; get; }
 }

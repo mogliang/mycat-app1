@@ -16,8 +16,8 @@ var host = Host.CreateDefaultBuilder(args)
         services.AddSingleton<Runner>();
         services.AddScoped<AzFileTask>();
         services.AddScoped<AzDiskTask>();
-        services.AddScoped<InternetCommTask>();
-        services.AddScoped<PodCommTask>();
+        services.AddScoped<WebTask>();
+        services.AddScoped<PodPingTask>();
     })
     .ConfigureLogging(b=>b.AddConsole())
     .Build();

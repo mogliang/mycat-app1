@@ -2,6 +2,7 @@
     "AppInfo": {
         "Title": "AKS test",
         "SiteName": "preprod-qliang-aks-dev-hosting",
-        "ShowMachineInfo": true
+        "ShowMachineInfo": true,
+        "AzTableName":"taskresultpreprodapp1"
     }
 }

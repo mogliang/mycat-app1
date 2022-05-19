@@ -20,14 +20,17 @@ namespace app1.runner
         public Runner(IServiceProvider serviceProvider, ILogger<Runner> logger, IConfiguration configuration)
         {
             _serviceProvider = serviceProvider;
-            _configuration = configuration;
             _logger = logger;
+            _configuration = configuration;
+
+            var section = _configuration.GetSection("Runner");
 
             var azTableConn = Environment.GetEnvironmentVariable("AZ_TABLE_CONN");
             if (azTableConn != null)
             {
+                var tableName = section.GetValue<string>("AzTableName");
                 _logger.LogInformation("conn is " + azTableConn);
-                _taskResultAzTableProvider = new TaskResultAzTableProvider(azTableConn);
+                _taskResultAzTableProvider = new TaskResultAzTableProvider(azTableConn, tableName);
                 _taskResultAzTableProvider.Initalize();
             }
             else
@@ -39,7 +42,7 @@ namespace app1.runner
 
         public async Task Run()
         {
-            var runId = $"RUN{DateTimeOffset.Now.TimeString()}-{Environment.MachineName}";
+            var runId = $"RUN{DateTimeOffset.Now.TimeString()}";
             var tasks = InitializeTasks();
             foreach (var task in tasks)
             {
