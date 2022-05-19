@@ -3,7 +3,7 @@ ARG VERSION
 WORKDIR /build
 
 # Copy everything
-COPY ../ ./
+COPY . ./
 WORKDIR /build/app1.runner
 # Restore as distinct layers
 RUN dotnet restore
