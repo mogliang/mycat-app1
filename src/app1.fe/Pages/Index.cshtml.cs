@@ -39,8 +39,9 @@ public class IndexModel : PageModel
             var taskResultTableProvider = new TaskResultAzTableProvider(azTableConn, this.AppInfo.AzTableName);
             taskResultTableProvider.Initalize();
             var now = DateTimeOffset.Now;
-            TaskResults = taskResultTableProvider.GetTaskResults(now.AddDays(-1), now).ToList();
-            TaskResults.OrderByDescending(en => en.Timestamp);
+            TaskResults = taskResultTableProvider.GetTaskResults(now.AddDays(-1), now)
+                .OrderByDescending(en => en.Timestamp)
+                .ToList();
         }
         catch (Exception ex)
         {
