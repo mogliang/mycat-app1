@@ -1,0 +1,45 @@
+{
+    "Logging": {
+        "LogLevel": {
+            "Default": "Information",
+            "Microsoft.AspNetCore": "Warning"
+        },
+        "Console": {
+            "LogLevel": {
+                "Default": "Information",
+                "Microsoft": "Warning",
+                "Microsoft.Hosting.Lifetime": "Information"
+            },
+            "FormatterName": "json",
+            "FormatterOptions": {
+                "SingleLine": true,
+                "IncludeScopes": true,
+                "TimestampFormat": "HH:mm:ss ",
+                "UseUtcTimestamp": true,
+                "JsonWriterOptions": {
+                    "Indented": "false"
+                }
+            }
+        }
+    },
+    "AzDiskTask": {
+        "Enabled": "false",
+        "DiskMountPath": "C:\\temp\\azdisk"
+    },
+    "AzFileTask": {
+        "Enabled": "true",
+        "FileMountPath": "/mnt/azure"
+    },
+    "PodPingTask": {
+        "Enabled": "true",
+        "PodServiceUrlFormat": "http://app1-be-statefulset-{0}.app1-be-service.app1.svc.cluster.local:8011/weatherforecast",
+        "PodCount": 3
+    },
+    "WebTask": {
+        "Enabled": "true",
+        "ServiceUrls": "https://www.google.com;https://www.bing.com;https://www.baidu.com;http://app1-be-service:8080/weatherforecast;http://20.119.69.89:8080/weatherforecast"
+    },
+    "Runner": {
+        "AzTableName": "taskresultpreprodapp1"
+    }
+}
