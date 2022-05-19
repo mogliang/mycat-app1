@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace app1.runner.Tasks
 {
     [Schedule]
-    public class PodPingTask : IOTask
+    public class PodPingTask : TaskBase
     {
         public PodPingTask(ILogger<PodPingTask> logger, IConfiguration configuration) : base(logger, configuration)
         {

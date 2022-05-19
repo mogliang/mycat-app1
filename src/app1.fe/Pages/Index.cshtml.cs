@@ -36,6 +36,10 @@ public class IndexModel : PageModel
         try
         {
             var azTableConn = Environment.GetEnvironmentVariable("AZ_TABLE_CONN");
+
+            azTableConn = "DefaultEndpointsProtocol=https;AccountName=qliang-aks-table;AccountKey=SwCZ81v7S3bYvb6VvF8jpQ13LX0FyTiQXSljcThxJrL6wWZLTwoQryqmlPiLxSLIeyBq9Wo1xvR3bv8V7W0WdA==;TableEndpoint=https://qliang-aks-table.table.cosmos.azure.com:443/";
+            this.AppInfo.AzTableName = "taskresultpreprodapp1";
+
             var taskResultTableProvider = new TaskResultAzTableProvider(azTableConn, this.AppInfo.AzTableName);
             taskResultTableProvider.Initalize();
             var now = DateTimeOffset.Now;

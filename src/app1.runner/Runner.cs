@@ -42,10 +42,10 @@ namespace app1.runner
 
         public async Task Run()
         {
-            var runId = $"RUN{DateTimeOffset.Now.TimeString()}";
             var tasks = InitializeTasks();
             foreach (var task in tasks)
             {
+                var runId = $"{DateTimeOffset.Now.TimeString()}-{task.Name}";
                 var result = await task.Run(runId);
                 _logger.LogInformation($"[{runId}-{task.Name}] result: {result.Success}, message: {result.Message}");
 

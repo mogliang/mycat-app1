@@ -12,7 +12,6 @@
         <thead>
             <tr>
                 <th scope="col">RunId</th>
-                <th scope="col">Task</th>
                 <th scope="col">Host</th>
                 <th scope="col">Result</th>
                 <th scope="col">Message</th>
@@ -26,16 +25,13 @@
                         @Html.DisplayFor(m=>result.RunId)
                     </th>
                     <td>
-                        @Html.DisplayFor(m=>result.TaskName)
-                    </td>
-                    <td>
                         @Html.DisplayFor(m=>result.Host)
                     </td>
                     <td>
                         @Html.CheckBoxFor(m=>result.Success)
                     </td>
                     <td>
-                        @Html.DisplayFor(m=>result.Message)
+                        <p style="white-space:pre;">@Html.DisplayFor(m=>result.Message)</p>
                     </td>
                 </tr>
             }

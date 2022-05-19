@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace app1.runner.Tasks
 {
     [Schedule]
-    public class WebTask : IOTask
+    public class WebTask : TaskBase
     {
         public WebTask(ILogger<PodPingTask> logger, IConfiguration configuration) : base(logger, configuration)
         {
