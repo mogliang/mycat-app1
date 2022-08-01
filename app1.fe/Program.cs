@@ -35,4 +35,12 @@ app.UseAuthorization();
 
 app.MapRazorPages();
 
+using (var scope = app.Services.CreateScope())
+{
+    var configuration = scope.ServiceProvider.GetRequiredService<IConfiguration>();
+    var delayInSec = configuration.GetSection("AppInfo").GetValue<int>("DelayStartInSec");
+    Console.WriteLine($"Will delay {delayInSec} sec for application warm up.");
+    Thread.Sleep(TimeSpan.FromSeconds(delayInSec));
+}
+
 app.Run();
