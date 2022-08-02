@@ -1,4 +1,3 @@
-# use kustomize to generate, instead of replace. so that config chanages can be picked automatically.
 apiVersion: v1
 kind: ConfigMap
 metadata:
