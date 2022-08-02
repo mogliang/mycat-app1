@@ -1,21 +1,31 @@
-# namespace
+# use kustomize to generate, instead of replace. so that config chanages can be picked automatically.
 apiVersion: v1
-kind: Namespace
+kind: ConfigMap
 metadata:
-  name: app1
+  name: app1-config
   labels:
-    name: app1
+    app: app1
+    tier: fe
+data:
+  app1.fe.appsettings.json: |
+    {
+      "AppInfo": {
+        "Title": "Today's Cats",
+        "SiteName": "qliang-k8s-hosting",
+        "ShowMachineInfo": true,
+        "DelayStartInSec": 60
+      }
+    }
 ---
 # create deployment
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: app1-deployment
-  namespace: app1
   labels:
     app: app1
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: app1
@@ -27,20 +37,26 @@ spec:
     spec:
       containers:
       - name: app1-fe
-        image: qliang.azurecr.io/app1.fe-image:107
+        image: qliang.azurecr.io/app1.fe-image:108
         ports:
         - containerPort: 8011
+        volumeMounts:
+        - name: appsettings
+          mountPath: /app1.fe/k8sconfig
+          readOnly: true
+      volumes:
+      - name: appsettings
+        configMap:
+          name: app1-config
 ---
 # create service and bind azure load balancer
 apiVersion: v1
 kind: Service
 metadata:
   name: app1-service
-  namespace: app1
   annotations:
 spec:
   type: LoadBalancer
-  loadBalancerIP: {VIP}
   selector:
     app: app1
     tier: fe
